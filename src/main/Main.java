@@ -30,7 +30,7 @@ import worldObjects.staticWorld.testing.TestRoom;
  * @author normenhansen
  */
 public class Main extends VRApplication {
-    
+    //TEST
     //Other/Logic
     private static VRAPI VRHardware=new OpenVR();
     
@@ -123,6 +123,7 @@ public class Main extends VRApplication {
         
         //Quit here is used as exmaple if the need arises for more non-Vive inputs
         getInputManager().addMapping("quit", new KeyTrigger(KeyInput.KEY_ESCAPE));
+        getInputManager().addMapping("forward", new KeyTrigger(KeyInput.KEY_W));
 
         ActionListener acl = new ActionListener() {
             
@@ -136,6 +137,10 @@ public class Main extends VRApplication {
                     
                     //observer.move(VRApplication.getFinalObserverRotation().getRotationColumn(0).mult(1f));
                     
+                }else if(name.equals("forward")){
+                    
+                    playerLogic.teleportArea(VRApplication.getFinalObserverRotation().getRotationColumn(0).mult(1f));
+                    
                 }
                 
             }
@@ -143,6 +148,7 @@ public class Main extends VRApplication {
         };
 
         getInputManager().addListener(acl, "quit");
+        getInputManager().addListener(acl, "forward");
         
     }
 
